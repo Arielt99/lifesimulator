@@ -22,8 +22,12 @@ public class Prey {
 
     float m_fOrientation; //Angle varying between 0 and 2Pi
 
+    public static final int WATER_DRUNK = 1;
+
     Vision m_Vision;
     Hearing m_Hearing;
+
+    WaterSpot m_waterSpot;
 
     public Prey(int p_iAgeMax, int p_iAge, int p_iLifePointMax, int p_iLifePoint, int p_iVigorMax, int p_iVigor, float p_fMaxMovingSpeed, float p_fMovingSpeed, float p_fOrientation, Vision p_Vision, Hearing p_Hearing) {
         this.m_iAgeMax = p_iAgeMax;
@@ -39,12 +43,16 @@ public class Prey {
         this.m_Hearing = p_Hearing;
     }
 
+    public Prey(WaterSpot p_waterSpot) {
+        m_waterSpot = p_waterSpot;
+    }
+
     void draw(){
 
     }
 
     void step(){
-
+        drink();
     }
 
     void pop(){
@@ -63,7 +71,7 @@ public class Prey {
     }
 
     void drink(){
-
+        int waterAvailable= m_waterSpot.requestDrinkingQuantity(WATER_DRUNK);
     }
 
     void rest(){

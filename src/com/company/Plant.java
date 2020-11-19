@@ -19,6 +19,10 @@ public class Plant {
         this.m_iCurrentNRJ = p_iCurrentNRJ;
     }
 
+    public Plant() {
+
+    }
+
     public static int getMaxPlantNRJPoints() {
         return s_iMaxPlantNRJPoints;
     }

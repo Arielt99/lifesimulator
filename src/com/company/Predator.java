@@ -25,10 +25,14 @@ public class Predator {
 
     float m_fOrientation; //Angle varying between 0 and 2Pi
 
+    public static final int WATER_DRUNK = 7;
+
     Vision m_Vision;
     Smelling m_Smelling;
     private boolean m_bHunting;
     Coords m_Coords;
+
+    WaterSpot m_waterSpot;
 
     public Predator(int p_iAgeMax, int p_iAge, int p_iLifePointMax, int p_iLifePoint, int p_iVigorMax, int p_iVigor, float p_fMaxMovingSpeed, float p_fMovingSpeed, float p_fOrientation, Vision p_Vision, Smelling p_Smelling) {
         this.m_iAgeMax = p_iAgeMax;
@@ -44,15 +48,16 @@ public class Predator {
         this.m_Smelling = p_Smelling;
     }
 
+    public Predator(WaterSpot p_waterSpot) {
+        m_waterSpot = p_waterSpot;
+    }
+
     void draw(){
 
     }
 
     void step(){
-        if(!m_bHunting){
-            spot(null);
-        }
-
+        drink();
     }
 
     void pop(){
@@ -71,7 +76,7 @@ public class Predator {
     }
 
     void drink(){
-
+        int waterAvailable= m_waterSpot.requestDrinkingQuantity(WATER_DRUNK);
     }
 
     void rest(){
@@ -86,7 +91,7 @@ public class Predator {
 
     void hunt(Prey p_Prey)  {
         m_bHunting = true;
-        
+
         if(true){
             eat(p_Prey);
         }
