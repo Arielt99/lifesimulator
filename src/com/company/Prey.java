@@ -2,6 +2,9 @@ package com.company;
 
 
 public class Prey {
+
+    public static final int MAX_WATER_DRUNK = 50;
+
     static int s_iMaxPreyAge;
     int m_iAgeMax;
     int m_iAge;
@@ -22,10 +25,9 @@ public class Prey {
 
     float m_fOrientation; //Angle varying between 0 and 2Pi
 
-    public static final int WATER_DRUNK = 1;
-
     Vision m_Vision;
     Hearing m_Hearing;
+    Coords m_Coords;
 
     WaterSpot m_waterSpot;
 
@@ -71,7 +73,12 @@ public class Prey {
     }
 
     void drink(){
-        int waterAvailable= m_waterSpot.requestDrinkingQuantity(WATER_DRUNK);
+        if(Jungle.s_randGenerator.nextInt(100)<20){
+            int waterThirst = 1 + Jungle.s_randGenerator.nextInt(MAX_WATER_DRUNK);
+            System.out.println("prey want to drink : " + waterThirst);
+            int waterAvailable= m_waterSpot.requestDrinkingQuantity(waterThirst);
+            System.out.println("prey drunk : " + waterAvailable);
+        }
     }
 
     void rest(){

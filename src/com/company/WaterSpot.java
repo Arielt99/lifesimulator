@@ -1,14 +1,25 @@
 package com.company;
 
  public class WaterSpot {
-    private float m_fArea;
-    private int m_iQuantity;
+
+     private Coords m_Coords;
+
+     private float m_fArea;
+
+     public void setQuantity(int p_iQuantity) {
+         m_iQuantity = p_iQuantity;
+     }
+
+     public int getQuantity() {
+         return m_iQuantity;
+     }
+
+     private int m_iQuantity;
     private float m_fEvaporationSpeed;
 
-     public WaterSpot(float p_fArea, int p_iQuantity, float p_fEvaporationSpeed) {
-         this.m_fArea = p_fArea;
-         this.m_iQuantity = p_iQuantity;
-         this.m_fEvaporationSpeed = p_fEvaporationSpeed;
+     WaterSpot() {
+         m_iQuantity = 500;
+         m_Coords = new Coords();
      }
 
      void draw(){

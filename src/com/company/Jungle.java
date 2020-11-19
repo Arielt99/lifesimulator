@@ -1,18 +1,21 @@
 package com.company;
 
+import java.util.Random;
+
 public class Jungle {
 
-    public static int m_iwidth;
-    public static int m_iheigt;
+    public static Random s_randGenerator = new Random();
+    private int m_iwidth;
+    private int m_iheigt;
 
-    Prey[] m_preyArray;
-    Predator[] m_predatorArray;
-    Plant[] m_plantArray;
-    WaterSpot m_waterSpot;
+    private Prey[] m_preyArray;
+    private Predator[] m_predatorArray;
+    private Plant[] m_plantArray;
+    private WaterSpot m_waterSpot;
 
     public Jungle() {
 
-        m_waterSpot = new WaterSpot(100,1000,100);
+        m_waterSpot = new WaterSpot();
 
         m_preyArray = new Prey[100];
         for (int i= 0; i<m_preyArray.length; i++){
@@ -42,17 +45,44 @@ public class Jungle {
         }
         m_waterSpot.step();
     }
+    void draw() {
+        for (int i = 0; i <m_iheigt; i++) {
+
+            for (int k = 0; k <  m_iwidth; k++) {
+                if (i == 0 || i == m_iheigt - 1)
+                    System.out.print("_");
+                else if (k == 0 || k == m_iwidth - 1)
+                    System.out.print("|");
+                else
+                    System.out.print(" ");
+            }
+            System.out.println("");
+        }
+
+    }
+
+    boolean hasLivingCreatures() {
+        return true;
+    }
+
+    public void spray(int p_iQuantity) {
+        m_waterSpot.setQuantity(m_waterSpot.getQuantity() + p_iQuantity);
+    }
 
     public static void main(String[] args) {
-        Jungle j = new Jungle();
+        Jungle jungle = new Jungle();
+        Weather weather = new Weather(jungle);
 
-        while(true){
-            j.step();
+        while(jungle.m_waterSpot.getQuantity() != 0){
+            weather.step();
+            jungle.step();
+            //terrain.draw();
             try {
                 Thread.sleep(250);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
+        System.out.println("now it is a desert every one is dead");
     }
 }
