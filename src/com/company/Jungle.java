@@ -41,7 +41,7 @@ public class Jungle {
             plant.step();
         }
         m_waterSpot.step();
-    };
+    }
 
     public static void main(String[] args) {
         Jungle j = new Jungle();
